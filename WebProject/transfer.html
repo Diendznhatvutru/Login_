@@ -8,7 +8,6 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <title>Document</title>
     <style>
-        /* Css chế độ tối */
        /* Phần Chuyển Tiền */
 /* Phần Chuyển Tiền */
 body.dark #transfer-section {
@@ -217,7 +216,7 @@ body.dark .auth-method button:hover {
             padding: 10px;
             margin-bottom: 15px;
             border: 1px solid #ddd;
-border-radius: 5px;
+            border-radius: 5px;
             background-color: #fff;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
@@ -590,6 +589,8 @@ text-align: center; /* Căn giữa nội dung tiêu đề */
                 <img src="img/logo.png">
             </a>
         </nav>
+
+        
         <!-- End of Navbar -->
 
 
@@ -661,8 +662,14 @@ text-align: center; /* Căn giữa nội dung tiêu đề */
             
                 <!-- Nút tiếp tục -->
                 <div class="form-section">
-                    <button type="button" onclick="goToConfirmation()">Tiếp tục</button>
+                    <button type="continue-button" onclick="handleContinue(event)">Tiếp tục</button>
                 </div>
+                <div id="error-message" style="display: none; color: red;">
+                    Vui lòng điền đầy đủ thông tin.
+                </div>
+                
+
+                
             </div>
         
             <!-- Phần Xác thực giao dịch -->
@@ -721,13 +728,17 @@ text-align: center; /* Căn giữa nội dung tiêu đề */
 
     <script>
 // Hàm xử lý khi nhấn nút "Tiếp tục"
-function handleContinue() {
-    // Kiểm tra tính hợp lệ của form
+function handleContinue(event) {
+    event.preventDefault();  // Ngăn chặn chuyển trang
+    console.log("Nút tiếp tục đã được nhấn");  // Kiểm tra sự kiện
+    
     if (validateForm()) {
-        // Nếu form hợp lệ, chuyển đến phần xác nhận giao dịch
         goToConfirmation();
+    } else {
+        alert("Vui lòng điền đầy đủ thông tin.");  // Thông báo nếu form chưa hợp lệ
     }
 }
+
 
 
   // Tạo OTP giả lập
@@ -770,6 +781,10 @@ function validateForm() {
     const amount = document.getElementById('amount').value.trim();
     const message = document.getElementById('message').value.trim();
     let isValid = true; // Biến theo dõi trạng thái hợp lệ
+
+    console.log("Kiểm tra form...");
+    // Kiểm tra các điều kiện ở đây
+    return true;  // Hoặc false nếu form không hợp lệ
 
     // Kiểm tra trường Số tiền chuyển
     if (amount === '') {
@@ -981,36 +996,58 @@ document.getElementById('source-account-confirm').textContent = sourceAccount;
 
 
 
+// Hàm xử lý khi nhấn nút "Tiếp tục"
+function handleContinue(event) {
+    event.preventDefault();  // Ngăn chặn hành động submit mặc định của form
+    if (validateForm()) {
+        goToConfirmation();
+    } else {
+        document.getElementById('error-message').style.display = 'block'; // Hiển thị thông báo lỗi
+    }
+}
 
-    
 // Hàm kiểm tra các trường input
 function validateForm() {
     const amount = document.getElementById('amount').value.trim();
     const message = document.getElementById('message').value.trim();
+    const beneficiaryAccount = document.getElementById('beneficiary-account').value.trim();
+    const beneficiaryName = document.getElementById('beneficiary-name').value.trim();
     let isValid = true; // Biến theo dõi trạng thái hợp lệ
 
-    // Kiểm tra trường Số tiền chuyển
+    // Kiểm tra các trường input
     if (amount === '') {
-        alert('Vui lòng nhập số tiền chuyển.');
         isValid = false;
     } else if (Number(amount) <= 0) {
-        alert('Số tiền chuyển phải lớn hơn 0.');
         isValid = false;
     }
 
-    // Kiểm tra trường Nội dung chuyển tiền
     if (message === '') {
-        alert('Vui lòng nhập nội dung chuyển tiền.');
+        isValid = false;
+    }
+
+    if (beneficiaryAccount === '') {
+        isValid = false;
+    }
+
+    if (beneficiaryName === '') {
         isValid = false;
     }
 
     return isValid;
 }
 
+// Hàm ẩn thông báo lỗi khi người dùng sửa dữ liệu
+function resetErrorMessage() {
+    document.getElementById('error-message').style.display = 'none';
+}
 
+// Cập nhật sự kiện để ẩn thông báo lỗi khi người dùng bắt đầu nhập lại thông tin
+document.querySelectorAll('input').forEach(input => {
+    input.addEventListener('input', resetErrorMessage);
+});
 
-
-
+// Thêm sự kiện cho nút "Tiếp tục"
+document.getElementById("continue-button").addEventListener("click", handleContinue);
 
     
 
