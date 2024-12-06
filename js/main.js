@@ -6,7 +6,7 @@ loginButton.addEventListener("click", (event) => {
 const sendResetMailButton = document.getElementById("sendmail");
 sendResetMailButton.addEventListener("click", (event) => {
   event.preventDefault();
-  window.location.href = "/Login_/WebProject/home.html";
+  window.location.href = "/Login_/sendmail.html";
 });
 const returnLogin = document.getElementById("returnlogin");
 returnLogin.addEventListener("click", (event) => {
