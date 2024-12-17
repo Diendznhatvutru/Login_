@@ -54,48 +54,79 @@ toggler.addEventListener('change', function () {
         document.body.classList.remove('dark');
     }
 });
-// saving Hoa
-document.getElementById('next').onclick = function(){
-    let lists = document.querySelectorAll('.item');
-    document.getElementById('slide').appendChild(lists[0]);
-}
-document.getElementById('prev').onclick = function(){
-    let lists = document.querySelectorAll('.item');
-    document.getElementById('slide').prepend(lists[lists.length - 1]);
-}
-// tính lãi suất Hoa
-document.getElementById('calculate').addEventListener('click', function () {
-    // Lấy số tiền gửi từ input
-    const principal = parseFloat(document.getElementById('principal').value);
-
-    // Lấy gói lãi suất được chọn
-    const selectedPackage = document.querySelector('input[name="package"]:checked');
-
-    // Kiểm tra số tiền gửi hợp lệ
-    if (isNaN(principal) || principal <= 0) {
-        alert("Vui lòng nhập số tiền gửi hợp lệ!");
-        return;
+// saving Hoa 
+function showContent(contentId) {
+    // Ẩn tất cả các nội dung
+    const contents = document.querySelectorAll(".content");
+    contents.forEach((content) => {
+      content.style.display = "none";
+    });
+  
+    // Hiển thị nội dung được chọn
+    const selectedContent = document.getElementById(contentId);
+    if (selectedContent) {
+      selectedContent.style.display = "block";
     }
+  }
+//   
+let lastScrollTop = 0;
+const header = document.querySelector("header");
+console.log(header)
+const toTop = document.querySelector(".to-top");
+const heroSection = document.querySelector(".hero");
 
-    if (!selectedPackage) {
-        alert("Vui lòng chọn gói tiết kiệm!");
-        return;
-    }
+window.addEventListener("scroll", () => {
+  const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+  const heroSectionOffsetTop = heroSection.offsetTop;
 
-    // Lấy giá trị lãi suất và thời hạn
-    const rate = parseFloat(selectedPackage.value);
-    const durationText = selectedPackage.nextSibling.textContent.trim();
+  if (scrollTop > heroSectionOffsetTop) {
+    toTop.classList.add("active");
+  } else {
+    toTop.classList.remove("active");
+  }
 
-    // Tìm số tháng dựa trên nội dung gói
-    let durationInMonths = 1; // Default
-    if (durationText.includes('3 tháng')) durationInMonths = 3;
-    if (durationText.includes('6 tháng')) durationInMonths = 6;
-    if (durationText.includes('9 tháng')) durationInMonths = 9;
-    if (durationText.includes('12 tháng')) durationInMonths = 12;
+  if (scrollTop > lastScrollTop) {
+    header.classList.add("hidden");
+  } else {
+    header.classList.remove("hidden");
+  }
 
-    // Tính lợi nhuận
-    const interest = (principal * (rate / 100)) * (durationInMonths / 12);
-
-    // Hiển thị kết quả
-    document.getElementById('interest').innerText = interest.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  lastScrollTop = scrollTop;
 });
+// check now
+document.getElementById('calculate').addEventListener('click', function () {
+  // Lấy số tiền gửi từ input
+  const principal = parseFloat(document.getElementById('principal').value);
+
+  // Lấy gói lãi suất được chọn
+  const selectedPackage = document.querySelector('input[name="package"]:checked');
+
+  // Kiểm tra số tiền gửi hợp lệ
+  if (isNaN(principal) || principal <= 0) {
+      alert("Vui lòng nhập số tiền gửi hợp lệ!");
+      return;
+  }
+
+  if (!selectedPackage) {
+      alert("Vui lòng chọn gói tiết kiệm!");
+      return;
+  }
+
+  // Lấy giá trị lãi suất và thời hạn
+  const rate = parseFloat(selectedPackage.value);
+  const durationText = selectedPackage.nextSibling.textContent.trim();
+
+  // Tìm số tháng dựa trên nội dung gói
+  let durationInMonths = 1; // Default
+  if (durationText.includes('3 month')) durationInMonths = 3;
+  if (durationText.includes('6 months')) durationInMonths = 6;
+  if (durationText.includes('9 months')) durationInMonths = 9;
+  if (durationText.includes('12 months')) durationInMonths = 12;
+
+  // Tính lợi nhuận
+  const interest = (principal * (rate / 100)) * (durationInMonths / 12);
+
+  // Hiển thị kết quả
+  document.getElementById('interest').innerText = interest.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+});
+

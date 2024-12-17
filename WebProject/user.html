@@ -8,6 +8,8 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
     <title>User</title>
   </head>
   <style>
@@ -477,38 +479,16 @@
     }
 
     /* Buttons Layout */
-    .management-items,
-    .utilities-items {
-      display: flex;
-      flex-direction: column; /* Make them stack vertically */
-      gap: 10px; /* Space between buttons */
-    }
-
-    /* Style for the buttons */
-    .management-button,
-    .utilities-button {
-      padding: 10px;
-      font-size: 16px;
-      background-color: #3498db;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: background-color 0.3s;
-    }
-
+    
     .management-button:hover,
     .utilities-button:hover {
-      background-color: #2980b9;
+      background-color: #2980b9; /* Màu nền khi hover */
     }
-
+    
     /* Chart Section */
     #chart-container {
-      margin-top: 20px;
-      display: flex;
-      justify-content: center;
+      margin-bottom: 20px; /* Tạo khoảng cách giữa biểu đồ và thông tin */
     }
-
     /* Expense Chart Section */
     .expense-chart-section {
       margin-top: 40px;
@@ -522,8 +502,10 @@
     }
 
     .chart-categories {
-      list-style-type: none;
-      padding-left: 0;
+      width: 100%;
+      max-width: 300px; /* Giới hạn chiều rộng cho thông tin */
+      margin-top: 10px;
+      text-align: left;
     }
 
     .chart-categories li {
@@ -547,8 +529,10 @@
     }
 
     .expense-chart-section {
-      flex: 1;
-      padding-right: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
     }
 
     #chart-container {
@@ -574,10 +558,159 @@
       height: 20px;
       margin-right: 10px;
       border-radius: 50%;
+    }.f-layout-container {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
     }
+    
+    /* Horizontal Section */
+    .horizontal-section {
+      display: flex;
+      gap: 10px;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+    
+    /* Vertical Section */
+    .vertical-section {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    
+    /* Button Styles */
+   
+.chart-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-top: 20px;
+  flex-wrap: wrap; /* Để các phần tử không bị chèn lên nhau */
+}
+
+#chart-container {
+  max-width: 400px;
+  height: 300px;
+  margin-top: 0;
+}
+
+/* Đảm bảo các mục chi tiêu không bị chèn lên biểu đồ */
+.chart-categories {
+  list-style-type: none;
+  margin-top: 20px;
+}
+.user-main-content {
+  margin-top: 20px;
+}
+
+.user-details {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 20px; /* Khoảng cách giữa các phần */
+}
+
+.user-avatar img {
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+ 
+}
+
+.utilities-section {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center; /* Căn giữa các nút */
+}
+
+.expense-chart-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+.expense-chart-section {
+  text-align: center;
+}
+
+#chart-container {
+  width: 400px;
+  height: 400px;
+}
+/* Định dạng chung cho container */
+.button-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px; /* Khoảng cách giữa các nhóm button */
+}
+
+/* Các nút trong phần Management */
+.management-buttons {
+  display: flex;
+  gap: 10px; /* Khoảng cách giữa các nút trong nhóm management */
+}
+
+.management-button {
+  flex-grow: 1; /* Các nút sẽ phát triển chiếm hết không gian có sẵn */
+  padding: 12px;
+  font-size: 16px;
+  background-color: #3498db; /* Màu nền xanh dương */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.management-button:hover {
+  background-color: #2980b9; /* Màu nền khi hover */
+}
+
+/* Các nút trong phần Utilities */
+.utilities-buttons {
+  display: flex;
+  gap: 10px; /* Khoảng cách giữa các nút trong nhóm utilities */
+}
+
+.utilities-button {
+  flex-grow: 1; /* Các nút sẽ phát triển chiếm hết không gian có sẵn */
+  padding: 12px;
+  font-size: 16px;
+  background-color: #2980b9; /* Màu nền xanh lá */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.utilities-button:hover {
+  background-color: #2980b9; /* Màu nền xanh lá */
+  ; /* Màu nền khi hover */
+}
+.container-frame {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ddd; /* Border to create the frame */
+  border-radius: 10px; /* Rounded corners */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Shadow effect */
+}
+
+.main-content {
+  margin-left: 240px;
+  padding: 20px;
+}
+
+
+
+
   </style>
   <body>
-    <!-- Sidebar -->
+    <!-- Sidebar -->  
     <div class="sidebar">
       <a href="#" class="logo">
         <i class="bx bx-code-alt"></i>
@@ -642,105 +775,110 @@
 
       <!-- Main content -->
       <main class="user-main-content">
+        <!-- User Section -->
         <div class="user-header">
           <div class="header-left">
             <h1>User</h1>
           </div>
         </div>
         <div class="user-main-container">
-          <!-- User Section -->
+          <!-- User Details Section -->
           <div class="user-details">
             <div class="user-avatar">
-              <img src="https://via.placeholder.com/80" alt="Avatar" />
-              <h2>Thân Văn Danh</h2>
+              <img src="./img/background1.jpg" alt="Avatar" />
+              <h2>Admin
+              </h2>
             </div>
-
-            <!-- Management Section -->
-            <div class="management-section">
-              <div class="management-title">QUẢN LÝ</div>
-              <div class="management-items">
+      
+            <!-- Utilities Section -->
+            <div class="button-container">
+              <!-- Management Section -->
+              <div class="management-buttons">
                 <button class="management-button">Cài đặt thanh toán</button>
                 <button class="management-button">Đăng nhập và bảo mật</button>
                 <button class="management-button">Cài đặt thông báo</button>
               </div>
-            </div>
-
-            <!-- Utilities Section -->
-            <div class="utilities-section">
-              <div class="utilities-title">TIỆN ÍCH</div>
-              <div class="utilities-items">
+            
+              <!-- Utilities Section -->
+              <div class="utilities-buttons">
+                <!-- Chuyển hướng sang trang thanh toán hóa đơn -->
+                <a href="payment.html">
+                  <button class="utilities-button">Giới Thiệu Về TDH BANK</button>
+                </a>
                 <button class="utilities-button">Quản lý chi tiêu</button>
-                <button class="utilities-button">Thanh toán hóa đơn</button>
-                <button class="utilities-button">Thẻ quà tặng</button>
+                <a href="promotion.html"><button class="utilities-button">Chương Trình Khuyến Mãi</button></a>
               </div>
+              
             </div>
-
-            <!-- Chart and Expense Section -->
-            <div class="expense-chart-wrapper">
-              <!-- Expense Section -->
-              <section class="expense-chart-section">
-                <h3>Chi tiêu tháng 11</h3>
-                <ul class="chart-categories">
-                  <li>
-                    <span style="background-color: #8e44ad"></span> Nhà cửa
-                    (22%)
-                  </li>
-                  <li>
-                    <span style="background-color: #e67e22"></span> Ăn uống
-                    (19%)
-                  </li>
-                  <li>
-                    <span style="background-color: #3498db"></span> Hóa đơn (9%)
-                  </li>
-                  <li>
-                    <span style="background-color: #2ecc71"></span> Còn lại
-                    (50%)
-                  </li>
-                </ul>
-              </section>
-
-              <!-- Chart Container -->
+            
+          </div>
+          
+          <!-- Chart Section -->
+          <div class="expense-chart-wrapper">
+            <div class="expense-chart-section">
+              <h3>Chi Tiêu Tháng 11</h3>
               <div id="chart-container">
-                <!-- The canvas for the chart -->
+                <canvas id="expenseChart"></canvas>
               </div>
             </div>
           </div>
         </div>
       </main>
-    </div>
+
 
     <!-- JavaScript for drawing the chart -->
     <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        const canvas = document.createElement("canvas");
-        canvas.width = 400;
-        canvas.height = 400;
-        const ctx = canvas.getContext("2d");
-        document.getElementById("chart-container").appendChild(canvas);
-
-        const data = [
-          { label: "Nhà cửa", value: 22, color: "#8e44ad" },
-          { label: "Ăn uống", value: 19, color: "#e67e22" },
-          { label: "Hóa đơn", value: 9, color: "#3498db" },
-          { label: "Còn lại", value: 50, color: "#2ecc71" },
-        ];
-
-        let total = data.reduce((sum, item) => sum + item.value, 0);
-        let startAngle = 0;
-
-        data.forEach((item) => {
-          let sliceAngle = (item.value / total) * 2 * Math.PI;
-          ctx.beginPath();
-          ctx.moveTo(200, 200); // Start at the center
-          ctx.arc(200, 200, 150, startAngle, startAngle + sliceAngle);
-          ctx.closePath();
-          ctx.fillStyle = item.color;
-          ctx.fill();
-          startAngle += sliceAngle;
-        });
+      // Lấy phần tử canvas từ DOM
+      const ctx = document.getElementById('expenseChart').getContext('2d');
+    
+      // Tạo biểu đồ tròn
+      const expenseChart = new Chart(ctx, {
+        type: 'pie', // Biểu đồ tròn
+        data: {
+          labels: ['Thực phẩm', 'Giải trí', 'Tiện ích', 'Vận chuyển']
+,          // Các danh mục chi tiêu
+          datasets: [{
+            label: 'Monthly Expenses',
+            data: [400, 300, 150, 100], // Số liệu chi tiêu (có thể thay đổi theo dữ liệu thực tế)
+            backgroundColor: [
+              'rgba(255, 99, 132, 0.2)', // Màu sắc cho Food
+              'rgba(54, 162, 235, 0.2)', // Màu sắc cho Entertainment
+              'rgba(255, 206, 86, 0.2)', // Màu sắc cho Utilities
+              'rgba(75, 192, 192, 0.2)'  // Màu sắc cho Transportation
+            ],
+            borderColor: [
+              'rgba(255, 99, 132, 1)',  // Viền màu cho Food
+              'rgba(54, 162, 235, 1)',  // Viền màu cho Entertainment
+              'rgba(255, 206, 86, 1)',  // Viền màu cho Utilities
+              'rgba(75, 192, 192, 1)'   // Viền màu cho Transportation
+            ],
+            borderWidth: 1
+          }]
+        },
+        options: {
+          responsive: true, // Làm cho biểu đồ tự động điều chỉnh khi thay đổi kích thước màn hình
+          plugins: {
+            legend: {
+              position: 'top' // Đặt vị trí legend (chú thích)
+            },
+            tooltip: {
+              callbacks: {
+                label: function(tooltipItem) {
+                  return tooltipItem.label + ': ' + tooltipItem.raw + ' VND'; // Hiển thị số tiền khi hover
+                }
+              }
+            }
+          }
+        }
       });
+      
+      
+      
+      
     </script>
+    
+    
 
     <script src="script.js"></script>
   </body>
-</html> 
+</html>
