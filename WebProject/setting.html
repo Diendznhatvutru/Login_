@@ -518,6 +518,95 @@
         background-color: #7b6ee3;
         color: white;
       }
+      /* Face Authentication Setup */
+      .face-auth-setup {
+        border: 1px solid #e0e0e0;
+        padding: 20px;
+        border-radius: 12px;
+        background-color: #ffffff;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        margin-top: 15px;
+        text-align: center;
+        transition: all 0.3s ease;
+      }
+
+      .face-auth-setup h3 {
+        font-size: 20px;
+        font-weight: bold;
+        color: #333;
+        margin-bottom: 10px;
+      }
+
+      .face-auth-setup p {
+        font-size: 16px;
+        color: #555;
+        margin-bottom: 20px;
+        line-height: 1.6;
+      }
+
+      .face-auth-setup ol {
+        text-align: left;
+        padding-left: 20px;
+        margin-bottom: 20px;
+      }
+
+      .face-auth-setup ol li {
+        font-size: 14px;
+        color: #666;
+        margin-bottom: 8px;
+      }
+
+      .face-auth-status {
+        font-size: 14px;
+        color: #4caf50;
+        margin-top: 15px;
+        font-weight: bold;
+      }
+
+      /* Start Button */
+      .face-auth-setup button {
+        background-color: #007bff; /* Màu xanh chuẩn */
+        color: #fff;
+        font-size: 16px;
+        font-weight: bold;
+        padding: 12px 24px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        box-shadow: 0 4px 6px rgba(0, 123, 255, 0.3);
+        transition: background-color 0.3s ease, transform 0.2s ease;
+      }
+
+      .face-auth-setup button:hover {
+        background-color: #0056b3; /* Xanh đậm hơn khi hover */
+        transform: translateY(-2px); /* Hiệu ứng nhấn nút */
+      }
+
+      .face-auth-setup button:active {
+        transform: translateY(0); /* Trở về trạng thái ban đầu khi click */
+        background-color: #004494; /* Màu đậm hơn khi nhấn giữ */
+      }
+
+      /* Responsive Design */
+      @media (max-width: 768px) {
+        .face-auth-setup {
+          padding: 15px;
+        }
+
+        .face-auth-setup h3 {
+          font-size: 18px;
+        }
+
+        .face-auth-setup p,
+        .face-auth-setup ol li {
+          font-size: 14px;
+        }
+
+        .face-auth-setup button {
+          font-size: 14px;
+          padding: 10px 20px;
+        }
+      }
     </style>
   </head>
   <body>
@@ -597,6 +686,37 @@
         </div>
         <section class="settings">
           <div class="section">
+            <div class="setting-item" onclick="toggleNotificationSettings()">
+              <i class="bx bx-bell"></i>
+              <span>Cài đặt thông báo</span>
+              <i class="bx bx-chevron-right"></i>
+            </div>
+
+            <!-- Notification Settings Form -->
+            <div
+              id="notification-settings"
+              class="notification-settings"
+              style="display: none"
+            >
+              <h3>Cài đặt thông báo</h3>
+              <p>Quản lý các thông báo bạn muốn nhận:</p>
+
+              <div class="notification-option">
+                <input type="checkbox" id="email-notifications" />
+                <label for="email-notifications">Thông báo qua Email</label>
+              </div>
+              <div class="notification-option">
+                <input type="checkbox" id="sms-notifications" />
+                <label for="sms-notifications">Thông báo qua SMS</label>
+              </div>
+              <div class="notification-option">
+                <input type="checkbox" id="app-notifications" />
+                <label for="app-notifications">Thông báo từ ứng dụng</label>
+              </div>
+
+              <button onclick="saveNotificationSettings()">Lưu thay đổi</button>
+            </div>
+
             <h2>Bảo mật</h2>
             <div class="setting-item" onclick="toggleDeviceManagement()">
               <i class="bx bx-devices"></i>
@@ -871,20 +991,40 @@
               </div>
             </div>
 
-            <div class="setting-item" onclick="showFaceAuthenticationMessage()">
+            <!-- Setting item for Face Authentication -->
+            <div class="setting-item" onclick="showFaceAuthenticationSetup()">
               <i class="bx bx-face"></i>
               <span>Thiết lập xác thực khuôn mặt</span>
               <i class="bx bx-chevron-right"></i>
             </div>
 
-            <!-- Face Authentication Message (hidden by default) -->
+            <!-- Face Authentication Setup Form (hidden by default) -->
             <div
-              class="error-message"
-              id="face-auth-message"
+              id="face-auth-setup"
+              class="face-auth-setup"
               style="display: none"
             >
-              Chức năng này sẽ được cập nhật trong thời gian tới.
+              <h3>Thiết lập xác thực khuôn mặt</h3>
+              <p>
+                Xác thực khuôn mặt giúp bảo mật tài khoản và giao dịch của bạn
+                một cách tối ưu.
+              </p>
+              <ol>
+                <li>Nhấn nút "Bắt đầu" để quét khuôn mặt của bạn.</li>
+                <li>Di chuyển khuôn mặt theo hướng dẫn trên màn hình.</li>
+                <li>
+                  Khi hoàn tất, hệ thống sẽ lưu trữ khuôn mặt của bạn để xác
+                  thực trong tương lai.
+                </li>
+              </ol>
+              <button onclick="startFaceAuthentication()">Bắt đầu</button>
+              <div
+                id="face-auth-status"
+                class="face-auth-status"
+                style="margin-top: 20px"
+              ></div>
             </div>
+
             <div class="setting-item">
               <i class="bx bx-fingerprint"></i>
               <span>Đăng nhập bằng vân tay</span>
@@ -1165,6 +1305,55 @@
           "otp-registration-form"
         );
         if (registrationForm) registrationForm.style.display = "none";
+      }
+      // Toggle visibility of notification settings
+      function toggleNotificationSettings() {
+        const settings = document.getElementById("notification-settings");
+        if (settings) {
+          settings.style.display =
+            settings.style.display === "none" || settings.style.display === ""
+              ? "block"
+              : "none";
+        }
+      }
+
+      // Save notification settings
+      function saveNotificationSettings() {
+        const emailNotifications = document.getElementById(
+          "email-notifications"
+        ).checked;
+        const smsNotifications =
+          document.getElementById("sms-notifications").checked;
+        const appNotifications =
+          document.getElementById("app-notifications").checked;
+
+        // Simulate saving settings (you can replace this with actual API calls)
+        alert(`Cài đặt thông báo đã được lưu:
+- Email: ${emailNotifications ? "Bật" : "Tắt"}
+- SMS: ${smsNotifications ? "Bật" : "Tắt"}
+- App: ${appNotifications ? "Bật" : "Tắt"}`);
+
+        // Hide settings after saving
+        const settings = document.getElementById("notification-settings");
+        if (settings) settings.style.display = "none";
+      }
+      function showFaceAuthenticationSetup() {
+        const faceAuthSetup = document.getElementById("face-auth-setup");
+        faceAuthSetup.style.display =
+          faceAuthSetup.style.display === "none" ? "block" : "none";
+      }
+
+      function startFaceAuthentication() {
+        const faceAuthStatus = document.getElementById("face-auth-status");
+        faceAuthStatus.innerHTML = "Đang khởi động máy ảnh...";
+
+        // Giả lập quá trình xác thực khuôn mặt
+        setTimeout(() => {
+          faceAuthStatus.innerHTML = `
+            <p>Quét khuôn mặt thành công!</p>
+            <p>Bây giờ bạn có thể sử dụng xác thực khuôn mặt để đăng nhập và thực hiện giao dịch an toàn hơn.</p>
+        `;
+        }, 3000); // Mô phỏng thời gian xử lý
       }
     </script>
     <script src="script.js"></script>
