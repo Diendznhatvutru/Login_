@@ -773,57 +773,54 @@
         </a>
       </nav>
 
-      <!-- Main content -->
-      <main class="user-main-content">
-        <!-- User Section -->
-        <div class="user-header">
-          <div class="header-left">
-            <h1>User</h1>
-          </div>
+    <!-- Main content -->
+<main class="user-main-content">
+  <!-- User Section -->
+  <div class="user-header">
+    <div class="header-left">
+      <h1>User</h1>
+    </div>
+  </div>
+  <div class="user-main-container">
+    <!-- User Details Section -->
+    <div class="user-details">
+      <div class="user-avatar">
+        <img src="./img/background1.jpg" alt="Avatar" />
+        <h2>Admin</h2>
+      </div>
+
+      <!-- Utilities Section -->
+      <div class="button-container">
+        <!-- Management Section -->
+        <div class="management-buttons">
+          <button class="management-button">Payment Settings</button>
+          <button class="management-button">Login and Security</button>
+          <button class="management-button">Notification Settings</button>
         </div>
-        <div class="user-main-container">
-          <!-- User Details Section -->
-          <div class="user-details">
-            <div class="user-avatar">
-              <img src="./img/background1.jpg" alt="Avatar" />
-              <h2>Admin
-              </h2>
-            </div>
-      
-            <!-- Utilities Section -->
-            <div class="button-container">
-              <!-- Management Section -->
-              <div class="management-buttons">
-                <button class="management-button">Cài đặt thanh toán</button>
-                <button class="management-button">Đăng nhập và bảo mật</button>
-                <button class="management-button">Cài đặt thông báo</button>
-              </div>
-            
-              <!-- Utilities Section -->
-              <div class="utilities-buttons">
-                <!-- Chuyển hướng sang trang thanh toán hóa đơn -->
-                <a href="payment.html">
-                  <button class="utilities-button">Giới Thiệu Về TDH BANK</button>
-                </a>
-                <button class="utilities-button">Quản lý chi tiêu</button>
-                <a href="promotion.html"><button class="utilities-button">Chương Trình Khuyến Mãi</button></a>
-              </div>
-              
-            </div>
-            
-          </div>
-          
-          <!-- Chart Section -->
-          <div class="expense-chart-wrapper">
-            <div class="expense-chart-section">
-              <h3>Chi Tiêu Tháng 11</h3>
-              <div id="chart-container">
-                <canvas id="expenseChart"></canvas>
-              </div>
-            </div>
-          </div>
+
+        <!-- Utilities Section -->
+        <div class="utilities-buttons">
+          <!-- Redirect to payment page -->
+          <a href="payment.html">
+            <button class="utilities-button">About TDH BANK</button>
+          </a>
+          <button class="utilities-button">Expense Management</button>
+          <a href="promotion.html"><button class="utilities-button">Promotional Programs</button></a>
         </div>
-      </main>
+      </div>
+    </div>
+
+    <!-- Chart Section -->
+    <div class="expense-chart-wrapper">
+      <div class="expense-chart-section">
+        <h3>November Expenses</h3>
+        <div id="chart-container">
+          <canvas id="expenseChart"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
 
 
     <!-- JavaScript for drawing the chart -->
@@ -835,7 +832,7 @@
       const expenseChart = new Chart(ctx, {
         type: 'pie', // Biểu đồ tròn
         data: {
-          labels: ['Thực phẩm', 'Giải trí', 'Tiện ích', 'Vận chuyển']
+          labels: ['Food', 'Entertainment', 'Utilities', 'Transportation']
 ,          // Các danh mục chi tiêu
           datasets: [{
             label: 'Monthly Expenses',
