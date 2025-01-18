@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saving</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #2c3e50;
+            color: white;
+        }
+
+        .news-container {
+            width: 80%;
+            margin: 20px auto;
+        }
+
+        .news-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 30px;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 20px;
+        }
+
+        .news-content {
+            flex: 1;
+        }
+
+        .news-title {
+            font-size: 20px;
+            margin: 5px 0;
+            color: #f1c40f;
+            line-height: 1.4;
+        }
+
+        .news-description {
+            font-size: 16px;
+            color: #bbb;
+            margin: 10px 0;
+        }
+
+        .news-author {
+            font-size: 14px;
+            color: #999;
+            margin-top: 10px;
+        }
+
+        .news-image {
+            width: 250px;
+            height: 200px;
+            object-fit: cover;
+            margin-left: 20px;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .see-more {
+            background: none;
+            border: none;
+            color: #007bff;
+            font-size: 14px;
+            cursor: pointer;
+            margin-top: 5px;
+            padding: 0;
+            text-decoration: underline;
+        }
+
+        .see-more:hover {
+            color: #0056b3;
+        }
+
+        ul {
+            margin: 10px 0;
+            padding-left: 20px;
+            list-style: disc;
+        }
+
+        ul li {
+            margin-bottom: 5px;
+        }
+
+        header {
+            text-align: center;
+            background-color: #333;
+            color: #f1c40f;
+            height: 80px;
+            width: 100%;
+        }
+
+        header h2 {
+            padding: 10px;
+            font-size: 50px;
+        }
+
+        button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #d32f2f;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 10px;
+            cursor: pointer; 
+            font-size: 15px;
+        }
+
+        footer {
+            background-color: #333;
+            color: #f1c40f;
+            text-align: center;
+            padding: 20px 10px;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 14px;
+        }
+
+        footer a {
+            color: #f1c40f;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h2>Tiền gửi tiết kiệm </h2>
+    </header>
+    <button onclick="window.history.back()">Trở về trang chủ </button>
+    <div class="news-container">
+        <!-- News Items -->
+        <div class="news-item">
+            <div class="news-content">
+                <h2 class="news-title">Tiền gửi tiết kiệm có kỳ hạn: Tính năng và lợi ích chính</h2>
+                <p class="news-description">
+                    <ul>
+                        <li><strong>Linh hoạt trong giao dịch:</strong> Khách hàng có thể thực hiện giao dịch tại bất kỳ chi nhánh hoặc điểm giao dịch nào của ngân hàng.</li>
+                        <li><strong>Điều khoản có thể tùy chỉnh:</strong> Khách hàng có thể chọn điều khoản gửi tiền và phương thức trả lãi phù hợp với nhu cầu của mình.</li>
+                        <li><strong>Lãi suất ổn định:</strong> Cung cấp lãi suất cố định trong suốt kỳ hạn gửi, giúp khách hàng đảm bảo thu nhập ổn định trong suốt thời gian gửi tiền.</li>
+                        <li><strong>Tài sản đảm bảo vay:</strong> Số dư tài khoản tiết kiệm có thể được sử dụng làm tài sản đảm bảo cho các khoản vay hoặc mục đích tài chính khác.</li>
+                        <li><strong>Số tiền gửi:</strong> Số tiền gửi tối thiểu thay đổi tùy thuộc vào chính sách của từng ngân hàng.</li>
+                        <li><strong>Tự động gia hạn:</strong> Khi đến hạn, số tiền tiết kiệm có thể được tự động gia hạn với kỳ hạn và lãi suất mới, trừ khi có yêu cầu khác từ khách hàng.</li>
+                        <li><strong>Rút tiền trước hạn:</strong> Việc rút tiền trước hạn được phép, nhưng lãi suất có thể thấp hơn hoặc được tính theo lãi suất tiền gửi không kỳ hạn.</li>
+                    </ul>
+                </p>
+                <p class="news-author">By BANK TEAM</p>
+            </div>
+            <img src="img/saving1.jpg" alt="Fixed-Term Savings" class="news-image">
+        </div>
+        <div class="news-item">
+            <div class="news-content">
+                <h2 class="news-title">Tiền gửi tiết kiệm không có kỳ hạn </h2>
+                <p class="news-description">
+                    <ul>
+                        <li><strong>Linh hoạt cao:</strong> Khách hàng có thể rút hoặc gửi tiền bất kỳ lúc nào mà không cần thông báo trước.</li>
+                        <li><strong>Lãi suất thấp hơn:</strong> Lãi suất thường thấp hơn so với tài khoản tiết kiệm có kỳ hạn do tính thanh khoản cao.</li>
+                        <li><strong>Giao dịch tiện lợi:</strong> Khách hàng có thể dễ dàng truy cập tài khoản của mình thông qua các kênh như ngân hàng trực tuyến, cây ATM hoặc các điểm giao dịch.</li>
+                        <li><strong>Không yêu cầu kỳ hạn:</strong> Khác với tiền gửi tiết kiệm có kỳ hạn, không có cam kết về một kỳ hạn cụ thể, phù hợp với các khoản tiết kiệm ngắn hạn hoặc quỹ khẩn cấp.</li>
+                        <li><strong>Tính lãi suất:</strong> Lãi suất thường được tính hàng ngày và chuyển vào tài khoản hàng tháng hoặc theo chính sách của ngân hàng.</li>
+                        <li><strong>Lý tưởng cho quỹ khẩn cấp:</strong> Loại tài khoản này rất phù hợp với những người muốn tiếp cận quỹ của mình nhanh chóng nhưng vẫn có thể nhận được lãi suất.</li>
+                    </ul>
+                </p>
+                <p class="news-author">By BANK TEAM</p>
+            </div>
+            <img src="img/saving2.jpg" alt="Non-fixed-term Savings" class="news-image">
+        </div>
+    </div>
+    <footer>
+        <p>&copy; 2024 Bank Team. All Rights Reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+    </footer>
+</body>
+</html>
