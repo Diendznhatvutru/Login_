@@ -767,20 +767,23 @@
 
       // Hàm để chuyển con trỏ sang trường nhập tiếp theo khi nhấn Enter
       function setupEnterToNextInput() {
-        const inputs = document.querySelectorAll("input"); // Lấy tất cả các trường input
+        const inputs = document.querySelectorAll('input'); // Lấy tất cả các trường input
         inputs.forEach((input, index) => {
-          input.addEventListener("keydown", (event) => {
-            if (event.key === "Enter") {
-              // Kiểm tra nếu phím Enter được nhấn
-              event.preventDefault(); // Ngăn hành động mặc định của Enter
-              const nextInput = inputs[index + 1]; // Lấy trường nhập tiếp theo
-              if (nextInput && !nextInput.disabled) {
-                nextInput.focus(); // Chuyển con trỏ đến trường tiếp theo
-              }
-            }
-          });
+            input.addEventListener('keydown', (event) => {
+                if (event.key === 'Enter') { // Kiểm tra nếu phím Enter được nhấn
+                    event.preventDefault(); // Ngăn hành động mặc định của Enter
+                    // Tìm trường tiếp theo không bị disabled hoặc readonly
+                    let nextInput = inputs[index + 1];
+                    while (nextInput && (nextInput.disabled || nextInput.readOnly)) {
+                        nextInput = inputs[Array.from(inputs).indexOf(nextInput) + 1];
+                    }
+                    if (nextInput) {
+                        nextInput.focus(); // Chuyển con trỏ đến trường tiếp theo
+                    }
+                }
+            });
         });
-      }
+    }
 
       // Gọi hàm khi DOM đã sẵn sàng
       document.addEventListener("DOMContentLoaded", setupEnterToNextInput);
